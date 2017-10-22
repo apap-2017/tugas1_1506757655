@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+	    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="page-header text-center">
+			<h2>Lihat Data Penduduk</h2>
+		</div>
+	    
+	    <div class="container text-center">
+		    <form method="get" action="/penduduk/cari">
+				<label for="kota">Kota/Kabupaten</label>
+				<br />
+	            <select name="kt" id="kota" th:readonly="true" required="true">
+		            <option th:value="${kota.id}" th:readonly="true" th:text="${kota.nama_kota}"></option>
+	            </select>
+	            <br /><br />
+	            
+	            <label for="kecamatan">Kecamatan</label>
+	            <br />
+	            <select name="kc" id="kecamatan" required="true">
+		            <option th:value="${kecamatan.id}" th:readonly="true" th:text="${kecamatan.nama_kecamatan}"></option>
+	            </select>
+	            <br /><br />
+	            
+	            <label for="kelurahan">kelurahan</label>
+	            <br />
+	            <select name="kl" id="kelurahan" required="true">
+		            <option th:value="${kelurahan.id}" th:readonly="true" th:text="${kelurahan.nama_kelurahan}">Pilih Kelurahan</option>
+		            <div th:each="kelurahan : ${kelurahan}">
+					    <option>Kelurahan</option>
+		            </div>
+	            </select>
+		        <br/><br />
+		    	<button type="submit" class="btn btn-primary">Lihat</button>
+		    </form>
+		    <br /><br />
+		    <div class="row">
+		    	<div class="col-sm-2"></div>
+			    <div class="col-sm-4">
+			    	<h3>Penduduk Termuda</h3>
+				    <table id="penduduk_termuda_table" class="table table-responsive table-hover">
+						<tbody>
+							<tr>
+								<th>NIK</th>
+								<td th:text="${pendudukTermuda.nik}">NIK</td>
+							</tr>
+							<tr>
+				                <th>Nama</th>
+				                <td th:text="${pendudukTermuda.nama}">Nama Penduduk Termuda</td>
+						    </tr>
+							<tr>
+						       	<th>Jenis Kelamin</th>
+						       	<td th:text="${pendudukTermuda.jenis_kelamin}">Jenis Kelamin Penduduk Termuda</td>
+						    </tr>
+						</tbody>
+			       	</table>
+			    </div>
+			    
+			    <div class="col-sm-4">
+			    	<h3>Penduduk Tertua</h3>
+				    <table id="penduduk_tertua_table" class="table table-responsive table-hover">
+						<tbody>
+							<tr>
+								<th>NIK</th>
+								<td th:text="${pendudukTertua.nik}">NIK</td>
+							</tr>
+							<tr>
+				                <th>Nama</th>
+				                <td th:text="${pendudukTertua.nama}">Nama Penduduk Termuda</td>
+						    </tr>
+							<tr>
+						       	<th>Jenis Kelamin</th>
+						       	<td th:text="${pendudukTertua.jenis_kelamin}">Jenis Kelamin Penduduk Termuda</td>
+						    </tr>							
+						</tbody>
+			       	</table>	
+		       	</div>
+		    </div>
+		    <br />
+		    
+		    <table id="penduduk_kelurahan_table" class="table table-responsive table-hover">
+		       <thead>
+		       		<tr>
+			       		<th class="text-center">NIK</th>
+		                <th class="text-center">Nama</th>
+		                <th class="text-center">Jenis Kelamin</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="penduduk,iterationStatus: ${penduduk}">
+				       	<td class="text-center" th:text="${penduduk.nik}">NIK</td>
+				       	<td class="text-center" th:text="${penduduk.nama}">Nama Penduduk</td>
+				       	<td class="text-center" th:text="${penduduk.jenis_kelamin}">Jenik Kelamin Penduduk</td>	
+				    </tr>
+				</tbody>
+	       	</table>
+		</div>
+       	<script>
+		    $(document).ready(function(){
+		        $('#penduduk_kelurahan_table').dataTable();
+		    });
+	   	</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="page-header text-center">
+			<h2>Lihat Data Penduduk</h2>
+		</div>
+	    
+	    <div class="container text-center">
+		    <form method="get" action="/penduduk/cari">
+				<label for="kota"><h6>Kota/Kabupaten</h6></label>
+				<br />
+	            <select name="kt" id="kota" required="true">
+		            <option th:disabled="disabled" th:selected="selected">Pilih Kota</option>
+		            <div th:each="kota : ${kota}">
+					    <option th:value="${kota.id}" th:text="${kota.nama_kota}">Kota</option>
+		            </div>
+	            </select>
+		        <br/><br />
+		        
+		    	<button type="submit" class="btn btn-primary">Lihat</button>
+		    </form>
+	    </div>
+	</body>
+</html>

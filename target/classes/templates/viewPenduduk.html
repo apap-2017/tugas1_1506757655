@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Data Penduduk</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SI Kependudukan</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Cari Data</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+  <h3 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}"></h3>
+  <br> </br>
+  <p th:text="'NIK '+ ${penduduk.nik}"> NIK</p>
+  <p th:text="'Nama	' + ${penduduk.nama}">Nama</p>
+  <p th:text="'Tempat/Tanggal Lahir ' + ${penduduk.tempat_lahir} + ', '
+  	+ ${penduduk.tanggal_lahir}">Tempat/Tanggal Lahir</p>
+   
+  <p th:text="'Alamat		'+ ${penduduk.alamat}">Alamat</p>
+  <p th:text="'RT/RW		' + ${penduduk.rt} + '/' + ${penduduk.rw}">RT/RW</p>
+  <p th:text="'Kelurahan/Desa		' + ${penduduk.nama_kelurahan}">Kelurahan/Desa</p>
+  <p th:text="'Kecamatan		'+ ${penduduk.nama_kecamatan}">Kecamatan</p>
+  <p th:text="'Kota		' + ${penduduk.nama_kota}">Kota</p>
+ 
+  <p th:text="'Golongan Darah ' + ${penduduk.golongan_darah}">Golongan Darah</p>
+  <p th:text="'Agama '+ ${penduduk.agama}">Agama</p>
+  <p th:text="'Status Perkawinan ' + ${penduduk.status_perkawinan}">Status Perkawinan</p>
+  <p th:text="'Pekerjaan ' + ${penduduk.pekerjaan}">Pekerjaan</p>
+  <p th:text="'Kewarnegaraan '+ ${penduduk.kewarganegaraan}">Kewarganegaraan</p>
+  <p th:text="'Status Kematian ' + ${penduduk.wafat}">Status Kematian</p>
+  
+  <form action="/penduduk/mati" method="post" th:object="${penduduk}">
+	  	<div>
+			<input type="hidden" name="nik" th:value="${penduduk.nik}" th:field="*{nik}" />
+		</div>	
+		<div>
+			<button class="btn btn-warning" type="submit" name="action" value="save">Nonaktifkan</button>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>

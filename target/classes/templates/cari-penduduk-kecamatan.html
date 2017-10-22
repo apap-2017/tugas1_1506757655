@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="page-header text-center">
+			<h2>Lihat Data Penduduk</h2>
+		</div>
+	    
+	    <div class="container text-center">
+		    <form method="get" action="/penduduk/cari">
+				<label for="kota">Kota/Kabupaten</label>
+				<br />
+	            <select name="kt" id="kota" th:readonly="true" required="true">
+		            <option th:value="${kota.id}" th:readonly="true" th:text="${kota.nama_kota}"></option>
+	            </select>
+	            <br /><br />
+	            
+	            <label for="kecamatan">Kecamatan</label>
+	            <br />
+	            <select name="kc" id="kecamatan" required="true">
+		            <option value="" th:disabled="disabled" th:selected="selected">Pilih Kecamatan</option>
+		            <div th:each="kecamatan : ${kecamatan}">
+					    <option th:value="${kecamatan.id}" th:text="${kecamatan.nama_kecamatan}">Kecamatan</option>
+		            </div>
+	            </select>
+		        <br/><br />
+		        
+		    	<button type="submit" class="btn btn-primary">Lihat</button>
+		    </form>
+	    </div>
+	</body>
+</html>
